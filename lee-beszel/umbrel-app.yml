@@ -5,7 +5,7 @@ storage:
 name: Beszel
 tagline: Lightweight server monitoring
 category: networking
-version: "0.21.1-1"
+version: "0.21.1-2"
 port: 8090
 description: >-
   Beszel is a lightweight monitoring hub with historical CPU, memory, disk,
@@ -27,4 +27,9 @@ repo: https://github.com/lee-antics/lee-umbrel-apps
 gallery: []
 permissions:
   - GPU
-releaseNotes: Beszel 0.21.1. Temporary GPU diagnostics.
+environment:
+  - name: AUTO_LOGIN
+    services:
+      - hub
+    note: Email of a Beszel user to sign in automatically, without a password. Anyone who can open Beszel is signed in as that user. Leave empty to require sign-in.
+releaseNotes: Beszel 0.21.1. Shows Intel GPU usage, and adds an optional auto-login setting.
