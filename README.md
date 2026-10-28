@@ -1,6 +1,6 @@
 # Lee's Umbrel App Store
 
-A personal [umbrelOS community app store](https://github.com/getumbrel/umbrel-community-app-store).
+This is a personal [umbrelOS community app store](https://github.com/getumbrel/umbrel-community-app-store). 
 
 To add it: umbrelOS → App Store → ⋯ → Community App Stores → paste
 `https://github.com/lee-antics/lee-umbrel-apps`.
@@ -12,7 +12,7 @@ To add it: umbrelOS → App Store → ⋯ → Community App Stores → paste
   network drive, add it in Files → Network, pick a folder on it for the
   **Network Media** slot in Tofa's app settings, then add `/network-media` as a
   library in Tofa.
-- **Beszel** (`lee-beszel`): monitoring hub on port 8090, plus an agent for the
+- **Beszel** (`lee-beszel`): monitoring hub, plus an agent for the
   Umbrel itself (system, Docker containers and the Intel GPU). To monitor the
   Umbrel, click **Add System** in Beszel and enter `/beszel_socket/beszel.sock`
   as the host. To move an existing hub here, restore its backup (or copy its
