@@ -40,4 +40,6 @@ defaultPassword: ""
 icon: https://app.tofa.tv/logo.svg
 repo: https://github.com/lee-antics/lee-umbrel-apps
 gallery: []
+permissions:
+  - GPU
 releaseNotes: Tofa 0.12.1.

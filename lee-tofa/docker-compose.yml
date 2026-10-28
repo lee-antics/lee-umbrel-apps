@@ -6,9 +6,8 @@ services:
     restart: unless-stopped
     # Tofa's docs call for host networking (local discovery).
     network_mode: host
-    # Intel integrated GPU for hardware transcoding.
-    devices:
-      - /dev/dri/renderD128:/dev/dri/renderD128
+    # GPU access (hardware transcoding) comes from the GPU permission in
+    # umbrel-app.yml; umbrelOS adds /dev/dri and its groups at install.
     volumes:
       - ${APP_DATA_DIR}/data:/data
       - ${UMBREL_ROOT}/home/Videos:/media:ro
