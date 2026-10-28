@@ -1,0 +1,30 @@
+manifestVersion: 1
+id: lee-beszel
+storage:
+  dataRoot: data
+name: Beszel
+tagline: Lightweight server monitoring
+category: networking
+version: "0.21.1"
+port: 8090
+description: >-
+  Beszel is a lightweight monitoring hub with historical CPU, memory, disk,
+  network, temperature and GPU stats, per-container Docker stats, and alerts.
+  This app runs the hub and an agent for this umbrelOS device, including its
+  Intel integrated GPU. After creating your account, click Add System and
+  enter /beszel_socket/beszel.sock as the host to monitor this device. Other
+  machines can be added with their own Beszel agent.
+developer: henrygd
+website: https://beszel.dev
+submitter: lee-antics
+support: https://github.com/henrygd/beszel/issues
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+icon: https://beszel.dev/icon.svg
+repo: https://github.com/lee-antics/lee-umbrel-apps
+gallery: []
+permissions:
+  - GPU
+releaseNotes: Beszel 0.21.1.

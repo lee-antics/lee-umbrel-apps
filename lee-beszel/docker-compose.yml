@@ -1,0 +1,43 @@
+services:
+  hub:
+    # Pinned to an exact release; .github/workflows/update-apps.yml bumps it.
+    image: henrygd/beszel:0.21.1@sha256:8514a69d9bbbcb74f371a3205561ee231fc0289739cea64e8131f341d695b770
+    restart: unless-stopped
+    # Host networking so agents on other machines can connect over WebSocket.
+    network_mode: host
+    environment:
+      APP_URL: http://${DEVICE_DOMAIN_NAME}:8090
+    volumes:
+      - ${APP_DATA_DIR}/data/hub:/beszel_data
+      - ${APP_DATA_DIR}/data/socket:/beszel_socket
+
+  agent:
+    image: henrygd/beszel-agent-intel:0.21.1@sha256:a8c8ee4eb71b66132128fb5421b6c27491d2b652a7aabcfdc638b60aaf529703
+    restart: unless-stopped
+    depends_on:
+      - hub
+    # Host networking so it reports the machine's real network traffic.
+    network_mode: host
+    # intel_gpu_top reads GPU usage through perf; /dev/dri and its groups
+    # come from the GPU permission in umbrel-app.yml.
+    cap_add:
+      - CAP_PERFMON
+    environment:
+      # The hub reaches this agent over a shared socket: add a system with
+      # /beszel_socket/beszel.sock as its host.
+      LISTEN: /beszel_socket/beszel.sock
+    # The agent only accepts the hub's public key. Read it out of the hub's
+    # private key (an unencrypted OpenSSH ed25519 key, where the public key
+    # blob sits at a fixed offset), waiting for the hub to create it.
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        until [ -s /hub/id_ed25519 ]; do sleep 2; done
+        export KEY="ssh-ed25519 $$(sed '1d;$$d' /hub/id_ed25519 | base64 -d | tail -c +44 | head -c 51 | base64 | tr -d '\n')"
+        exec /agent
+    volumes:
+      - ${APP_DATA_DIR}/data/agent:/var/lib/beszel-agent
+      - ${APP_DATA_DIR}/data/socket:/beszel_socket
+      - ${APP_DATA_DIR}/data/hub:/hub:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro

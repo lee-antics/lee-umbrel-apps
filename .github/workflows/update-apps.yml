@@ -1,4 +1,4 @@
-name: Update Tofa
+name: Update apps
 
 on:
   schedule:
@@ -14,14 +14,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check for a newer Tofa release
+      - name: Check for newer releases
         id: bump
-        run: echo "version=$(python3 .github/scripts/update_tofa.py)" >> "$GITHUB_OUTPUT"
+        run: |
+          python3 .github/scripts/update_apps.py > bumped.txt
+          echo "message=$(paste -sd, bumped.txt | sed 's/,/, /g')" >> "$GITHUB_OUTPUT"
+          rm bumped.txt
 
       - name: Commit the bump
-        if: steps.bump.outputs.version != ''
+        if: steps.bump.outputs.message != ''
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -am "Tofa ${{ steps.bump.outputs.version }}"
+          git commit -am "${{ steps.bump.outputs.message }}"
           git push
