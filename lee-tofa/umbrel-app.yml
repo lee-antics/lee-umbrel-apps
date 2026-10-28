@@ -1,5 +1,22 @@
 manifestVersion: 1
 id: lee-tofa
+storage:
+  dataRoot: data
+folderAccess:
+  - id: videos
+    name: Videos
+    note: Media for your Tofa libraries, your Home/Videos folder unless you pick another. Add /media as a library in Tofa. Access is read-only to protect the original files.
+    mounts:
+      - service: server
+        targetPath: /media
+        readOnly: true
+  - id: network-media
+    name: Network Media
+    note: Select a folder on a network drive (add the drive in Files → Network first), then add /network-media as a library in Tofa. Access is read-only to protect the original files.
+    mounts:
+      - service: server
+        targetPath: /network-media
+        readOnly: true
 name: Tofa
 tagline: Your personal media server
 category: media
@@ -9,8 +26,9 @@ description: >-
   Tofa streams your own movie and TV library, with hardware-accelerated
   transcoding on the Intel integrated GPU. Its database, backups, cache and
   logs are kept in the app's storage. Your umbrelOS Home/Videos folder is
-  mounted read-only: in Tofa, add /media as a library. After installing,
-  open the app to link the server to your Tofa account.
+  mounted read-only at /media, and a folder on a network drive can be added
+  at /network-media from the app's settings. After installing, open the app
+  to link the server to your Tofa account.
 developer: TofaTV
 website: https://tofa.tv
 submitter: lee-antics

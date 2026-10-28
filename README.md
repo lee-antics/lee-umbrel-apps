@@ -8,7 +8,10 @@ To add it: umbrelOS → App Store → ⋯ → Community App Stores → paste
 ## Apps
 
 - **Tofa** (`lee-tofa`): self-hosted media server. Your `Home/Videos` folder is
-  mounted read-only at `/media`; add that as a library in Tofa.
+  mounted read-only at `/media`; add that as a library in Tofa. To use a
+  network drive, add it in Files → Network, pick a folder on it for the
+  **Network Media** slot in Tofa's app settings, then add `/network-media` as a
+  library in Tofa.
 
 ## Updates
 
