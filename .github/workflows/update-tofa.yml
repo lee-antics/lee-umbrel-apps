@@ -1,0 +1,27 @@
+name: Update Tofa
+
+on:
+  schedule:
+    - cron: "0 18 * * *" # daily, 5am Sydney (AEDT)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for a newer Tofa release
+        id: bump
+        run: echo "version=$(python3 .github/scripts/update_tofa.py)" >> "$GITHUB_OUTPUT"
+
+      - name: Commit the bump
+        if: steps.bump.outputs.version != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Tofa ${{ steps.bump.outputs.version }}"
+          git push

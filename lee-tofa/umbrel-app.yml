@@ -1,0 +1,25 @@
+manifestVersion: 1
+id: lee-tofa
+name: Tofa
+tagline: Your personal media server
+category: media
+version: "0.12.1"
+port: 33333
+description: >-
+  Tofa streams your own movie and TV library, with hardware-accelerated
+  transcoding on the Intel integrated GPU. Its database, backups, cache and
+  logs are kept in the app's storage. Your umbrelOS Home/Videos folder is
+  mounted read-only: in Tofa, add /media as a library. After installing,
+  open the app to link the server to your Tofa account.
+developer: TofaTV
+website: https://tofa.tv
+submitter: lee-antics
+support: https://docs.tofa.tv
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+icon: https://app.tofa.tv/logo.svg
+repo: https://github.com/lee-antics/lee-umbrel-apps
+gallery: []
+releaseNotes: Tofa 0.12.1.
