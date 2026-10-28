@@ -4,6 +4,8 @@ services:
     image: ghcr.io/tofatv/tofa:0.12.1@sha256:088fc64b13b4d5d06a853f994165e0903b141ac6bd506911d6779e33e598c807
     init: true
     restart: unless-stopped
+    # Tofa recommends 512m for its embedded database (Docker's default is 64m).
+    shm_size: 512m
     # Tofa's docs call for host networking (local discovery).
     network_mode: host
     # GPU access (hardware transcoding) comes from the GPU permission in

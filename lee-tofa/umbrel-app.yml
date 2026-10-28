@@ -20,7 +20,7 @@ folderAccess:
 name: Tofa
 tagline: Your personal media server
 category: media
-version: "0.12.1"
+version: "0.12.1-1"
 port: 33333
 description: >-
   Tofa streams your own movie and TV library, with hardware-accelerated
@@ -42,4 +42,4 @@ repo: https://github.com/lee-antics/lee-umbrel-apps
 gallery: []
 permissions:
   - GPU
-releaseNotes: Tofa 0.12.1.
+releaseNotes: Tofa 0.12.1. Gives the embedded database 512 MB of shared memory, as Tofa recommends.

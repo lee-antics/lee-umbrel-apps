@@ -4,6 +4,10 @@ Looks at ghcr.io/tofatv/tofa for the highest X.Y.Z tag. If it is newer than
 the version in lee-tofa/umbrel-app.yml, pins the compose image to that tag
 and digest and raises the app version, which makes umbrelOS offer an update.
 Prints the new version, or nothing when already up to date.
+
+The app version may carry a package revision (X.Y.Z-N) for changes to this
+package that don't change Tofa; umbrelOS offers an update whenever the version
+text changes. Only the X.Y.Z part is compared with Tofa's releases.
 """
 
 import json
@@ -16,6 +20,7 @@ APP_DIR = Path(__file__).resolve().parents[2] / "lee-tofa"
 MANIFEST = APP_DIR / "umbrel-app.yml"
 COMPOSE = APP_DIR / "docker-compose.yml"
 SEMVER = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
+APP_VERSION = re.compile(r"^(\d+)\.(\d+)\.(\d+)(?:-\d+)?$")
 ACCEPT = ", ".join([
     "application/vnd.oci.image.index.v1+json",
     "application/vnd.docker.distribution.manifest.list.v2+json",
@@ -32,8 +37,8 @@ def get(url, token=None, method="GET"):
     return urllib.request.urlopen(req, timeout=30)
 
 
-def version_key(tag):
-    return tuple(int(part) for part in SEMVER.match(tag).groups())
+def version_key(version):
+    return tuple(int(part) for part in APP_VERSION.match(version).groups())
 
 
 def main():
@@ -43,7 +48,7 @@ def main():
 
     manifest = MANIFEST.read_text()
     current = re.search(r'^version: "([^"]+)"$', manifest, re.M).group(1)
-    if SEMVER.match(current) and version_key(latest) <= version_key(current):
+    if APP_VERSION.match(current) and version_key(latest) <= version_key(current):
         return
 
     digest = get(f"https://ghcr.io/v2/{REPO}/manifests/{latest}", token, "HEAD").headers["Docker-Content-Digest"]
