@@ -33,6 +33,9 @@ services:
       - /bin/sh
       - -c
       - |
+        echo "DIAG perf_event_paranoid=$$(cat /proc/sys/kernel/perf_event_paranoid) caps=$$(grep CapEff /proc/self/status)"
+        ls -l /dev/dri /sys/bus/event_source/devices | sed 's/^/DIAG /'
+        timeout 4 intel_gpu_top -J -s 1000 2>&1 | head -15 | sed 's/^/DIAG /'
         until [ -s /hub/id_ed25519 ]; do sleep 2; done
         export KEY="ssh-ed25519 $$(sed '1d;$$d' /hub/id_ed25519 | base64 -d | tail -c +44 | head -c 51 | base64 | tr -d '\n')"
         exec /agent

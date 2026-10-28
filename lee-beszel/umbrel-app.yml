@@ -5,7 +5,7 @@ storage:
 name: Beszel
 tagline: Lightweight server monitoring
 category: networking
-version: "0.21.1"
+version: "0.21.1-1"
 port: 8090
 description: >-
   Beszel is a lightweight monitoring hub with historical CPU, memory, disk,
@@ -27,4 +27,4 @@ repo: https://github.com/lee-antics/lee-umbrel-apps
 gallery: []
 permissions:
   - GPU
-releaseNotes: Beszel 0.21.1.
+releaseNotes: Beszel 0.21.1. Temporary GPU diagnostics.
