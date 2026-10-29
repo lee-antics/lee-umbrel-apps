@@ -1,6 +1,6 @@
 services:
   server:
-    # Pinned to an exact release; .github/workflows/update-tofa.yml bumps it.
+    # Pinned to an exact release; .github/workflows/update-apps.yml bumps it.
     image: ghcr.io/tofatv/tofa:0.12.1@sha256:088fc64b13b4d5d06a853f994165e0903b141ac6bd506911d6779e33e598c807
     init: true
     restart: unless-stopped

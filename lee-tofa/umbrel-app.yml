@@ -20,7 +20,7 @@ folderAccess:
 name: Tofa
 tagline: Your personal media server
 category: media
-version: "0.12.1-1"
+version: "0.12.1-2"
 port: 33333
 description: >-
   Tofa streams your own movie and TV library, with hardware-accelerated
@@ -42,4 +42,9 @@ repo: https://github.com/lee-antics/lee-umbrel-apps
 gallery: []
 permissions:
   - GPU
-releaseNotes: Tofa 0.12.1. Gives the embedded database 512 MB of shared memory, as Tofa recommends.
+# Tofa serves HTTPS on its own port with a *.connect.tofa.tv certificate,
+# which apps on the home network require. Without this, umbrelOS answers
+# HTTPS on the port with its own certificate and apps fall back to the relay.
+nativeTlsHostnameSuffixes:
+  - connect.tofa.tv
+releaseNotes: Tofa 0.12.1. Devices on your home network now connect to Tofa directly instead of through the relay.
