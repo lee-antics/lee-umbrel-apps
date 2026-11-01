@@ -20,7 +20,7 @@ folderAccess:
 name: Tofa
 tagline: Your personal media server
 category: media
-version: "0.12.1-2"
+version: "0.13.0"
 port: 33333
 description: >-
   Tofa streams your own movie and TV library, with hardware-accelerated
@@ -47,4 +47,4 @@ permissions:
 # HTTPS on the port with its own certificate and apps fall back to the relay.
 nativeTlsHostnameSuffixes:
   - connect.tofa.tv
-releaseNotes: Tofa 0.12.1. Devices on your home network now connect to Tofa directly instead of through the relay.
+releaseNotes: Tofa 0.13.0.
