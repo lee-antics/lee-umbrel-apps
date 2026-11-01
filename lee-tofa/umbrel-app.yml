@@ -47,4 +47,36 @@ permissions:
 # HTTPS on the port with its own certificate and apps fall back to the relay.
 nativeTlsHostnameSuffixes:
   - connect.tofa.tv
-releaseNotes: Tofa 0.13.0.
+releaseNotes: >-
+  Tofa 0.13.0:
+    New:
+      - Live TV: build channels from your library, or add tuners and playlists, with a guide and recordings.
+      - A new setup takes you from your first library to watching on your TV, and can bring your libraries, history, watchlists, collections and people from Plex, Jellyfin or Emby.
+      - Requests work without other apps, and each person can have their own request setting.
+      - Allow video conversion in Settings > Transcoding turns video conversion off for everyone, and each person can have their own "Can convert video" setting.
+      - Mixed libraries hold movies and shows together. Browse can be organised by type or by library.
+      - Limit each profile to selected libraries, and add Recently Added rows per library.
+      - Search splits results into shelves per library when you have several of a type.
+      - Delete generated previews for one library or the whole server.
+      - Hide paths and titles in Support bundles.
+      - A new sync API lets your own tools read and update watch state.
+    Changed:
+      - On update, we look for intros and credits across your libraries in the background, including libraries with previews off. On Network mounts with previews off, this only happens on playback or when you start it.
+      - Libraries follow symlinks outside their folders by default. You can turn this off in Library options.
+      - A folder can no longer belong to two libraries, which used to leave the second one empty.
+      - If you were here before this release, we offer you the new setup once: owners the full setup, everyone else their personal part. It starts from your current settings, and you can say no thanks.
+    Removed:
+      - The Save watch history switch. We now record every play on your server. You can still delete your history.
+      - `POST /api/v1/media/refresh`. Use the bulk refresh action.
+    Fixed:
+      - Playback setting changes are no longer lost when apps sync their defaults.
+      - Network mounts are no longer re-read again and again for subtitle checks, and complete metadata no longer refreshes every five minutes.
+      - Episode details now pick up catalog corrections.
+      - Jellyfin 12 sign-in and sync work again, and watched marks sent back to Jellyfin now find more episodes.
+      - Plex and Jellyfin imports match both halves of a two-episode file.
+      - A profile locked or removed on another device now returns you to Who's watching instead of getting stuck.
+      - Remote access says direct only after an outside check succeeds.
+      - Storage usage and low-space alerts now read the right disk on network mounts.
+
+
+  Full release notes can be found at https://docs.tofa.tv/whats-new.html#server-0-13-0
