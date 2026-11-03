@@ -1,7 +1,7 @@
 services:
   server:
     # Pinned to an exact release; .github/workflows/update-apps.yml bumps it.
-    image: ghcr.io/tofatv/tofa:0.13.0@sha256:6fcbb2f80d6bac880952362ee1fe2a89479713f5b35a85a64c89a5d958317b6f
+    image: ghcr.io/tofatv/tofa:0.13.1@sha256:9c99b779bb0b4f64990dec9e98903193c43d6c42d20eb0feaccaea752aa83a1c
     init: true
     restart: unless-stopped
     # Tofa recommends 512m for its embedded database (Docker's default is 64m).
