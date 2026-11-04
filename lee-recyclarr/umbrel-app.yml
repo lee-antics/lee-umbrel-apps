@@ -1,0 +1,28 @@
+manifestVersion: 1
+id: lee-recyclarr
+storage:
+  dataRoot: data
+name: Recyclarr
+tagline: Sync TRaSH Guides profiles to Radarr and Sonarr
+category: media
+version: "8.8.1"
+port: 8095
+description: >-
+  Recyclarr keeps the custom formats, quality profiles, quality sizes and
+  naming in Radarr and Sonarr in step with the TRaSH Guides. It syncs once a
+  day at 4am. This app shows the log of the latest sync. Recyclarr has no
+  settings screen: put your recyclarr.yml (and secrets.yml, for URLs and API
+  keys) in the app's data/config folder. Radarr and Sonarr on this Umbrel are
+  reached at http://radarr_server_1:7878 and http://sonarr_server_1:8989.
+developer: Recyclarr
+website: https://recyclarr.dev
+submitter: lee-antics
+support: https://github.com/recyclarr/recyclarr/issues
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+icon: https://recyclarr.dev/img/recyclarr.png
+repo: https://github.com/lee-antics/lee-umbrel-apps
+gallery: []
+releaseNotes: Recyclarr 8.8.1, with a page showing the latest sync log.

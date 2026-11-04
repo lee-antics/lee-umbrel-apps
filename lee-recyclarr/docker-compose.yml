@@ -1,0 +1,48 @@
+services:
+  app_proxy:
+    environment:
+      APP_HOST: lee-recyclarr_web_1
+      APP_PORT: 8080
+
+  recyclarr:
+    # Pinned to an exact release; .github/workflows/update-apps.yml bumps it.
+    image: ghcr.io/recyclarr/recyclarr:8.8.1@sha256:3e9c41b9ec29bbf65fe846864058730d321a21f7695d8c0d9437b73e34d50ad9
+    restart: unless-stopped
+    user: "1000:1000"
+    environment:
+      # Cron mode: no sync on start, one sync a day.
+      CRON_SCHEDULE: "0 4 * * *"
+      TZ: Australia/Sydney
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+
+  web:
+    # Status page: the latest sync log, refreshed every minute. Only the
+    # generated page is served, never the config folder (it holds API keys).
+    image: busybox:1.37.0@sha256:a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec
+    restart: unless-stopped
+    user: "1000:1000"
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config:ro
+    command:
+      - /bin/sh
+      - -c
+      - |
+        mkdir -p /tmp/www
+        while true; do
+          log=$$(find /config/logs -name '*.log' 2>/dev/null | xargs -r ls -t | head -1)
+          {
+            echo '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="60">'
+            echo '<title>Recyclarr</title><body style="font:14px ui-monospace,monospace;margin:16px;background:#111;color:#ddd">'
+            echo '<h1 style="font:600 20px system-ui">Recyclarr</h1><p>Syncs daily at 4am (Sydney).</p>'
+            if [ -n "$$log" ]; then
+              echo "<p>Latest log: $${log#/config/}</p><pre style=\"white-space:pre-wrap\">"
+              tail -n 300 "$$log" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g'
+              echo '</pre>'
+            else
+              echo '<p>No sync has run yet.</p>'
+            fi
+          } > /tmp/www/index.html.new && mv /tmp/www/index.html.new /tmp/www/index.html
+          sleep 60
+        done &
+        exec httpd -f -p 8080 -h /tmp/www

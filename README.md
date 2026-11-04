@@ -18,6 +18,13 @@ To add it: umbrelOS → App Store → ⋯ → Community App Stores → paste
   as the host. To move an existing hub here, restore its backup (or copy its
   `beszel_data` folder into the app's `data/hub` folder) and restart the app;
   agents that trusted the old hub keep working because its key comes with it.
+- **Recyclarr** (`lee-recyclarr`): syncs TRaSH Guides custom formats, quality
+  profiles and sizes to Radarr and Sonarr once a day at 4am. The app page
+  shows the latest sync log. There is no settings screen: put your
+  `recyclarr.yml` and `secrets.yml` in the app's `data/config` folder. On the
+  same Umbrel, Radarr and Sonarr are at `http://radarr_server_1:7878` and
+  `http://sonarr_server_1:8989`. Keep these files out of this repo; they hold
+  API keys.
 
 ## Updates
 

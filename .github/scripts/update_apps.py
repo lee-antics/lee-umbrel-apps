@@ -34,6 +34,8 @@ APPS = {
                  {"changelog": "https://docs.tofa.tv/whats-new.md", "heading": "Server"}),
     "lee-beszel": ("Beszel", ["henrygd/beszel", "henrygd/beszel-agent-intel"],
                    {"github": "henrygd/beszel"}),
+    "lee-recyclarr": ("Recyclarr", ["ghcr.io/recyclarr/recyclarr"],
+                      {"github": "recyclarr/recyclarr"}),
 }
 MAX_NOTES = 10  # bullets per release section; the rest are left to the linked page
 SEMVER = re.compile(r"^(\d+)\.(\d+)\.(\d+)$")
