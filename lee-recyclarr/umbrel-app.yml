@@ -5,7 +5,7 @@ storage:
 name: Recyclarr
 tagline: Sync TRaSH Guides profiles to Radarr and Sonarr
 category: media
-version: "8.8.1-1"
+version: "8.8.1-2"
 port: 8095
 description: >-
   Recyclarr keeps the custom formats, quality profiles, quality sizes and
@@ -25,4 +25,4 @@ defaultPassword: ""
 icon: https://recyclarr.dev/img/recyclarr.png
 repo: https://github.com/lee-antics/lee-umbrel-apps
 gallery: []
-releaseNotes: Ships the config folder so Recyclarr, which runs as user 1000, can write its state and logs there.
+releaseNotes: The status page shows just the info, warning and error lines of the latest sync.

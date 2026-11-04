@@ -17,8 +17,9 @@ services:
       - ${APP_DATA_DIR}/data/config:/config
 
   web:
-    # Status page: the latest sync log, refreshed every minute. Only the
-    # generated page is served, never the config folder (it holds API keys).
+    # Status page: the info, warning and error lines of the latest sync,
+    # refreshed every minute. Only the generated page is served, never the
+    # config folder (it holds API keys).
     image: busybox:1.37.0@sha256:a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec
     restart: unless-stopped
     user: "1000:1000"
@@ -30,14 +31,14 @@ services:
       - |
         mkdir -p /tmp/www
         while true; do
-          log=$$(find /config/logs -name '*.log' 2>/dev/null | xargs -r ls -t | head -1)
+          log=$$(find /config/logs -name '*.debug.log' 2>/dev/null | xargs -r ls -t | head -1)
           {
             echo '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="60">'
             echo '<title>Recyclarr</title><body style="font:14px ui-monospace,monospace;margin:16px;background:#111;color:#ddd">'
             echo '<h1 style="font:600 20px system-ui">Recyclarr</h1><p>Syncs daily at 4am (Sydney).</p>'
             if [ -n "$$log" ]; then
               echo "<p>Latest log: $${log#/config/}</p><pre style=\"white-space:pre-wrap\">"
-              tail -n 300 "$$log" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g'
+              grep -E '^\[[0-9:]+ (INF|WRN|ERR|FTL)\]' "$$log" | tail -n 300 | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g'
               echo '</pre>'
             else
               echo '<p>No sync has run yet.</p>'
