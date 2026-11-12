@@ -5,7 +5,7 @@ storage:
 name: Beszel
 tagline: Lightweight server monitoring
 category: networking
-version: "0.21.1-2"
+version: "0.21.2"
 port: 8090
 description: >-
   Beszel is a lightweight monitoring hub with historical CPU, memory, disk,
@@ -32,4 +32,19 @@ environment:
     services:
       - hub
     note: Email of a Beszel user to sign in automatically, without a password. Anyone who can open Beszel is signed in as that user. Leave empty to require sign-in.
-releaseNotes: Beszel 0.21.1. Shows Intel GPU usage, and adds an optional auto-login setting.
+releaseNotes: >-
+  Beszel 0.21.2:
+    - Add an actions menu with alert settings to the system detail page
+    - Add `FAN_SENSORS` to include or exclude fan sensors
+    - Add styled HTML alert emails
+    - Add `no_self_update` build tag to disable hub and agent self-updates
+    - Add warnings for missing automatic login users and trusted proxy configuration
+    - Add video encode/decode engine usage to GPU metrics when using nvtop
+    - Limit sign-in attempts to 10 per minute per address
+    - Improve GPU collection retries and back off slow or repeatedly failing reads
+    - Fix hub crashes caused by null entries in agent data
+    - Fix agent health checks incorrectly reporting disconnected agents as healthy
+    - …and 26 more
+
+
+  Full release notes can be found at https://github.com/henrygd/beszel/releases/tag/v0.21.2

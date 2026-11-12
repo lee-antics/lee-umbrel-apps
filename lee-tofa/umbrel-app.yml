@@ -20,7 +20,7 @@ folderAccess:
 name: Tofa
 tagline: Your personal media server
 category: media
-version: "0.13.2"
+version: "0.13.3"
 port: 33333
 description: >-
   Tofa streams your own movie and TV library, with hardware-accelerated
@@ -48,4 +48,76 @@ permissions:
 nativeTlsHostnameSuffixes:
   - connect.tofa.tv
 releaseNotes: >-
-  Tofa 0.13.2.
+  Tofa 0.13.3:
+    Recaps and intros:
+      - tofa now finds the "Previously on" recap at the start of an episode, and the player offers Skip Recap, just like Skip Intro. Choose Ask, Skip or Play for recaps in How you like to watch.
+      - Intro detection is more accurate and an intro skip no longer runs into the programme. New and replaced episodes get the new detection as they are analysed.
+    Live TV:
+      - Watch past programmes on the web. Channels with catch-up show a play mark in the guide, the Day menu goes back up to 7 days, and Plays until says how long a programme stays available.
+      - Turn catch-up on per source in its Settings tab, with a provider time zone override. Settings > Rewind window sets how far viewers can rewind, with a disk estimate per channel. Long rewind windows show programme marks on the timeline.
+      - Record series from any programme, including past catch-up programmes. Recordings has Recorded, Upcoming and Series, a series can keep only the latest episodes, and the editor previews the next 14 days and names any recording in the way.
+      - A programme that a guide name rule gives a set time can now be set to record from the guide, like any programme. Cancel or Skip on a recording that has already started keeps it.
+      - Channels now opens on your sources' groups. Turn a whole group on or off with one switch (channels you turned off yourself stay off), remove a group with its channels, bring a removed group back, and search groups, channels, numbers and entries not added in one box. Lists scroll instead of paging, and each source can let new groups start on or off.
+      - Upload your own logo for a channel you built. It shows in every guide and app in place of the automatic or title logo until you remove it.
+      - Source channels say why a logo is missing, with a Logo filter and the most common reason for the source.
+      - Playlist header lines like "##### SPORTS #####" are marked as header lines and never added as channels automatically. A banner turns off the ones already added.
+      - Guide mappings show the guide channel's name and how it was matched: the playlist's guide id, the same name, the same number or your choice.
+      - A library channel block can play a film series, a universe or a smart collection, including collections hidden from Browse. Channels that mix shows list each episode by name in the guide.
+      - …and 2 more
+    Requests:
+      - Admins and request managers choose where a request goes (server, quality profile, folder, tags, language and who it is for) in the request window and with Edit on any queue row, until it is sent to a connected library tool.
+      - Request rules in Integrations send matching titles to a chosen server, folder or tags, with a Try a title preview. Each connected library tool can tag requests with the person who asked.
+      - Blocked from requests in Integrations stops chosen titles, collections or keywords from being requested. Discover hides them from members and marks them for admins and request managers.
+      - Analytics > Requests shows requests over time, time to approve, how 4K asks turned out, top requesters and requested titles nobody has watched.
+      - Requests is in the account menu for everyone who can request, and requests from someone else say who asked. HD seasons added alongside a 4K request now count toward the person's show limit.
+    Collections:
+      - Collections pinned to Home now show on Home in the web app. The smart collection editor can pin to Home too.
+      - Turn on "Only titles in your library" for a collection to count and show only what you have.
+      - Follow a list from any address: a tofa list, a JSON list of ids, an MDBList list or a text list of IMDb ids. Private lists can use an access token.
+      - Collection tiles use the same artwork on every app, and a single poster is never cropped.
+    People and profiles:
+      - User Settings has Can download and Streams at once for each person. Someone at their limit sees which of their streams are playing, and the next episode on the same device never counts twice.
+      - Setting or changing a profile PIN asks for it twice.
+      - The profile picture in the menu and User Settings > Account now follow the profile you switch to.
+    Setup:
+      - Setup and the welcome for new members skip what you already chose in another tofa app, and steps added later show once in a short New in tofa window on Home. People who skipped setup see the steps they missed there once, too.
+      - Admins choose the poster look for the whole server in setup, with a live preview of your own titles. Admins of a server that is already set up meet it once in the same setup screen, and never when the server or a library already had its own look.
+      - How you like to watch uses the same words everywhere: Play the next episode, then Intros, Recaps and Credits (Ask, Skip or Play), and Hide episode spoilers.
+      - Remote Access no longer says apps fall back to IPv4 or the relay when a verified custom address works. It says apps connect through your custom address, and the NAT advice matches what your server has.
+      - When the web app cannot reconnect, it now offers a link to your other servers in the tofa app beside Try again.
+    Importing from Plex, Jellyfin and Emby:
+      - Imported episodes land on the right episode by their own identity, even when the source numbers seasons differently. More watchlist entries import when the title is in your library.
+      - Plays brought over from Plex link to the exact title they came from, so My History shows the right poster and never another film's poster for a title with the same name.
+      - One Plex library that refuses to list no longer stops the whole history sync. The rest imports and the sync names the library it skipped. History sync is also faster on large libraries.
+      - Connected accounts shows what we keep updated from Plex as one line per kind, like artwork for 1,240 titles, with Pause all. Find a title to pause it, one row per film or show instead of one per image.
+    Admin and stats:
+      - Analytics names the household profile behind each play, like "Mia (Greg)", and Top viewers can filter by profile.
+      - Viewer locations place plays correctly behind a reverse proxy or tunnel on your network, instead of counting them all at home.
+      - An empty full log for a play now says why, such as log retention or the capture level, with a link to Settings.
+      - Report a Problem always sends a bundle within 45 seconds, even on a struggling server. Bundles also explain Continue Watching for the reporting profile and Live logo failures.
+      - Lifecycle > Rules lists only the preset in use.
+    Playback fixes:
+      - Offline downloads no longer fail with "subtitle publication source changed" after media is copied, restored or remounted. The server checks the file again and carries on when it is unchanged.
+      - A slow disk on Unraid or a network mount no longer stalls the whole server. A file that is briefly unreadable answers a retryable error instead of a server error.
+      - A season held as multi-episode files counts every episode they cover on posters, collections, next up and Requests, so it no longer reads as incomplete.
+      - A show's Play button on the web follows the server's next episode, even when the show is not in your Continue Watching row.
+      - The web app keeps your profile unlocked when the server briefly fails to load it.
+    Everything else:
+      - Pause background work during playback now also holds poster, preview and intro analysis jobs. Intro and credit analysis no longer gets stuck waiting on the next season.
+      - After an internet outage, the server reconnects to tofa sooner.
+      - The web app and the desktop app can be controlled from the tofa phone app. Turn it off per device in Settings > Playback > Allow remote control.
+    Monitoring and API:
+      - Playback events use the same name for a person, the same resolution and the same position units as the session list. The session list and stream start events now include the app's platform.
+      - Sessions say whether a viewer is on your network, outside it or on the relay, even when the app does not report it.
+      - The admin list of linked Plex, Jellyfin and Emby accounts includes each person's account id on that server, and the Plex server id.
+      - Watch time per play is now accurate (it read about half before), the reported bitrate is what the server actually sent, and Live library channels report progress and watch time.
+      - Read-only API keys can make lookups that send their query in the request body. Read-only and watch sync keys can no longer open Live streams or poll a Plex sign-in.
+      - Unavailable files, a busy database and an unreachable library tool answer their own retryable error codes instead of a general server error.
+      - Tools can pause and resume a session on apps that support remote control.
+      - Copy buttons, such as the one for a new API key, now work when you open the server on a plain HTTP address on your network.
+      - Sessions show the subtitle track in use.
+      - The events socket announces created and deleted requests.
+      - …and 1 more
+
+
+  Full release notes can be found at https://docs.tofa.tv/whats-new.html#server-0-13-3
